@@ -55,9 +55,9 @@ $('#loading').hide();
           catch(e){
             ;
           }
-          w=window.open('','Mahidol Day Profile');
+          w=window.open('','Kamfak 2017');
           
-          w.document.write("<img src='"+d+"' alt='MahidolDay'/>");
+          w.document.write("<img src='"+d+"' alt='Kamfak 2017'/>");
           $('#doneModal').modal({
             backdrop: 'static',
           });
