@@ -31,7 +31,7 @@ $('#loading').hide();
         // A();
         var dt = canvas.toDataURL({format: 'jpeg', multiplier: (1.0/canvas.backgroundImage.scaleX)});
         dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
-        dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=mahidolday.jpg');
+        dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Kamfak2017.jpg');
         this.href = dt;
         // var dt = canvas.toDataURL('image/jpeg');
         // this.href = dt;
