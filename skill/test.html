@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link rel="manifest" href="site.webmanifest">
+		<link rel="apple-touch-icon" href="icon.png">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
+	</head>
+	<body>
+		<div id="scoreBoard" class="container ">
+			<span v-if="loading">Loading...</span>	
+			<div class="accordion" id="accResult">
+				<div class="card" v-for="(val, key) in titleLarge">
+					<div class="card-header" id="">
+						<h4 class="mb-0">
+							<button class="btn btn-link" type="button" data-toggle="collapse" :data-target="val.id" aria-expanded="true" :aria-controls="val.nid">
+								{{key}}: {{val.percent}}%
+							</button>
+						</h4>
+					</div>
+					<div :id="val.nid" class="collapse" aria-labelledby="headingOne" data-parent="#accResult">
+						<div class="card-body">
+							<div v-for="(val, key) in val.sm" class="row">
+								<span class="col-6">{{key}}</span> 
+								<h4>: <span class="badge badge-info">{{val.toFixed(1)}}/5.0</span></h4>
+								<br>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="display: block; height: 404px; ">
+			<div id="chart"></div>
+		</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.8/dist/vue.js"></script>	
+		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+		<script type='text/javascript'>    
+var publicSpreadsheetUrl = '122Yc_s9HhJmahGLqpBKl_ILfkQbBNBbNGQma0ZxU0UI';
+var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/16wY1COuvPUo7FaCaNnFXJGjXvq-VLhHbHqjZI64f-qM/edit?usp=sharing';
+var options;
+var chart ; 
+var titleL = {};
+var titleS = {};
+var titleCnt = {};
+var response;
+
+var app = new Vue({
+	el: '#scoreBoard',
+	data: {
+		loading: true,
+		titleLarge: {},
+		titleSmall: {},
+		titleCnt: {},
+	}
+});
+
+function createChart(){
+	options = {
+		chart: {
+			height: 500,
+			type: 'radar',
+		},
+		series: [{
+			name: 'Result',
+			data: Object.values(app.titleLarge).map(x=>x.percent),
+		}],
+		title: {
+			text: '',
+		},
+		labels: Object.keys(app.titleLarge),
+	};
+	chart = new ApexCharts(document.querySelector("#chart"), options);
+	chart.render();
+}
+
+
+function init() {
+	Tabletop.init( { key: publicSpreadsheetUrl,
+									 callback: showInfo,
+									 simpleSheet: true } )
+}
+
+function calcScore(word){
+	if(word == 'ยอดเยี่ยม') return 5;
+	if(word == 'ดีมาก') return 4;
+	if(word == 'ดี') return 3;
+	if(word == 'พอใช้') return 2;
+	if(word == 'ต้องปรับปรุง') return 1;
+}
+
+function addTitleL(title){
+	app.titleLarge[title] = titleL[title];
+}
+
+function addTitleS(tL, title, res){
+	titleL[tL] += res[tL+' ['+title+']'];
+}
+
+function buildTitle(response){
+	for( var key in response ){
+		var m = key.match(/(.*) \[(.*)\]/);
+		if(m){
+			if(titleL.hasOwnProperty(m[1])) {
+				titleCnt[m[1]]++;
+			}
+			else {
+				titleL[m[1]] = 0;
+				titleCnt[m[1]] = 1;
+			}
+			if(!titleS.hasOwnProperty(m[1])) titleS[m[1]] = {};
+				titleS[m[1]][m[2]] = response[m[0]];
+			<!-- else titleS[m[1]][m[2]] = [m[2]]; -->
+		}
+	}
+	var id=1;
+	for( var T in titleL ){
+		for(let t in titleS[T]){
+			addTitleS(T, t, response);
+		}
+		titleL[T] = {id: "#coll"+id, nid: "coll"+id, val: titleL[T], cnt: titleCnt[T], percent: (titleL[T]/titleCnt[T]*20).toFixed(2)};
+		id++;
+		titleL[T]['sm'] = titleS[T];
+	}
+}
+
+function mergeResponse(response){
+	let i=1;
+	if(!response) return {};
+	var res = response[0];
+	for(let T in res){
+		if(T.match(/(.*) \[(.*)\]/)) res[T] = calcScore(res[T]);
+	}
+	for(i=1;i<response.length;i++){
+		for(let T in response[i]){
+			if(T.match(/(.*) \[(.*)\]/)) res[T] += calcScore(response[i][T]);
+		}
+	}
+	for(let T in res){
+		if(T.match(/(.*) \[(.*)\]/)) res[T] = res[T]/response.length;
+	}
+	return res;
+}
+
+function getId(){
+	let url = new URL(window.location.href);
+	return url.searchParams.get('id');
+}
+
+function showInfo(data, tabletop) {
+	<!-- alert('Successfully processed!') -->
+	app.loading = false;
+	response = data;
+	<!-- let studentId = getId(); -->
+  let studentId = prompt("Insert student id", "");
+  console.log('student id = '+studentId);
+	response = response.filter(x => x['รหัส ผู้ถูกประเมิน']==studentId);
+	res = mergeResponse(response);
+	console.log(res);
+	buildTitle(res);
+	app.titleLarge = titleL;
+	app.titleSmall = titleS;
+	console.log(titleL)
+	createChart();
+}
+
+window.addEventListener('DOMContentLoaded', init)
+			
+			
+		</script>
+</body>
