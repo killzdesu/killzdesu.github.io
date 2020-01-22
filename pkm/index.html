@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+        <title>{Title}{block:SearchPage} ({lang:Search results for SearchQuery}){/block:SearchPage}{block:PermalinkPage}{block:PostSummary} — {PostSummary}{/block:PostSummary}{/block:PermalinkPage}</title>
+        {block:Description}
+        <meta name="description" content="{MetaDescription}">
+        {/block:Description}
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<script>
+   //############Configuration############	  
+	  var sheet_title = 'Pokemon Rare Balls List';     																//ชื่อ Title
+	  var trainer_image = 'https://cdn.pixabay.com/photo/2019/11/27/14/06/pokemon-4657023_960_720.png'; 			//ลิงค์รูปภาพของเรา
+	  var trainer_name = 'JuiJui'; 
+	  var trainer_fc = 'SW-1840-1674-8122';																			//FC เครื่อง
+	  var trainer_note = 'ว่างช่วง 2 ทุ่มเป็นต้นไปนะครับ';																			//Note ไว้สำหรับบอกเรื่องต่างๆ ใส่ข้อความอะไรก็ได้
+	  
+	  
+	  var google_sheet_id = '1FdFsAXQN8UBM600AL-yG-PEDPVqSVf_fI7rXVcepU2Q';											//ID Google Spreadsheet
+	  var page_length = 50;																							//จำนวนแถวที่แสดงในแต่ละหน้า
+	  var page_length_change = true;																				//เปิด / ปิดระบบการแสดงจำนวนแถว (เปิด = true / ปิด = false)
+	  var split_page = true;																						//เปิด / ปิดระบบแบ่งหน้า (เปิด = true / ปิด = false)
+	  
+	  var show_pokemon_no = true;																					//แสดงแถว No. (แสดง = true / ไม่แสดง = false)
+	  var show_pokemon_sprite = true;																				//แสดงแถว Sprite (แสดง = true / ไม่แสดง = false)
+	  var show_pokemon_name = true;																					//แสดงแถว Name (แสดง = true / ไม่แสดง = false)
+	  var show_pokemon_ball = true;																					//แสดงแถว Ball (แสดง = true / ไม่แสดง = false)
+	  var show_pokemon_ability = true;																				//แสดงแถว Ability (แสดง = true / ไม่แสดง = false)
+	  var show_pokemon_nature = true;																				//แสดงแถว Nature (แสดง = true / ไม่แสดง = false)
+	  var show_pokemon_egg_moves = true;																			//แสดงแถว Egg Moves (แสดง = true / ไม่แสดง = false)
+	  var show_pokemon_note = true;	  																				//แสดงแถว Note (แสดง = true / ไม่แสดง = false)
+	  //#####################################	
+</script>
+
+<div class="container-fluid"> 
+		<div class="col-md-12">
+			<div class="pkTitle"></div>
+		</div>
+		<div class="col-md-12 pkTrainerInfo filterCheck">
+		  <div>
+			<div class="pkTrainerProfile"></div>
+			<div class="pkTrainerName"></div>
+		  <div>
+		</div>  
+		<div class="col-md-12">
+			<div class="pkTrainerNote"></div>
+		</div>
+		
+        <div class="col-md-12 filterCheck">
+			<div class="col-sm-3 col-md-3 pkBallSelected resetPadding filterCheck">
+				<label class="filterLabel">Pokeball</label>
+				<select id="pkBall" multiple="multiple">
+					<option value="Safari Ball">Safari Ball</option>
+					<option value="Sport Ball">Sport Ball</option>
+					<option value="Fast Ball">Fast Ball</option>
+					<option value="Friend Ball">Friend Ball</option>
+					<option value="Heavy Ball">Heavy Ball</option>
+					<option value="Level Ball">Level Ball</option>
+					<option value="Love Ball">Love Ball</option>
+					<option value="Lure Ball">Lure Ball</option>
+					<option value="Moon Ball">Moon Ball</option>
+					<option value="Dream Ball">Dream Ball</option>
+					<option value="Beast Ball">Beast Ball</option>
+				</select>        
+			</div>
+			
+			<div class="col-sm-3 col-md-3 resetPadding filterCheck">
+				<label class="filterLabel">Generation</label>
+				<select id="pkGen" multiple="multiple">
+					<option value="gen1">Generation 1</option>
+					<option value="gen2">Generation 2</option>
+					<option value="gen3">Generation 3</option>
+					<option value="gen4">Generation 4</option>
+					<option value="gen5">Generation 5</option>
+					<option value="gen6">Generation 6</option>
+					<option value="gen7">Generation 7</option>
+					<option value="gen8">Generation 8</option>
+				</select>        
+			</div>
+			
+			<div class="col-sm-3 col-md-3 pkNatureSelected resetPadding filterCheck">
+				<label class="filterLabel">Nature</label>
+				<select id="pkNature" multiple="multiple">
+					<option value="Adamant">Adamant</option>
+					<option value="Bashful">Bashful</option>
+					<option value="Bold">Bold</option>
+					<option value="Brave">Brave</option>
+					<option value="Calm">Calm</option>
+					<option value="Careful">Careful</option>
+					<option value="Docile">Docile</option>
+					<option value="Gentle">Gentle</option>
+					<option value="Hardy">Hardy</option>
+					<option value="Hasty">Hasty</option>
+					<option value="Impish">Impish</option>
+					<option value="Jolly">Jolly</option>
+					<option value="Lax">Lax</option>
+					<option value="Lonely">Lonely</option>
+					<option value="Mild">Mild</option>
+					<option value="Modest">Modest</option>
+					<option value="Naive">Naive</option>
+					<option value="Naughty">Naughty</option>
+					<option value="Quiet">Quiet</option>
+					<option value="Quirky">Quirky</option>
+					<option value="Rash">Rash</option>
+					<option value="Relaxed">Relaxed</option>
+					<option value="Sassy">Sassy</option>
+					<option value="Serious">Serious</option>
+					<option value="Timid">Timid</option>
+				</select>        
+			</div>
+			
+			<div class="col-sm-3 col-md-3 pkOthersSelected resetPadding">
+				<div class="col-md-6 pkHiddenAbilitySelected resetPadding">
+					<input type="checkbox" class="css-checkbox" id="pkability" name="pkability" value="[HA]">
+					<label for="pkability" class="css-label">Hidden Ability</label>
+				</div>
+				<div class="col-md-6 pkEggMovesSelected resetPadding">
+					<input type="checkbox" class="css-checkbox" id="pkeggmoves" name="pkeggmoves" value="Have Egg Moves">
+					<label for="pkeggmoves" class="css-label">Egg Moves</label>
+				</div>
+			</div>
+		</div>
+		
+		<div id="dataTable" class="filterCheck">
+		  <table id="pkDataTable" class="display" cellspacing="0" width="100%"></table>
+		</div>
+	  </div>
+</div>
+<!-- partial -->
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

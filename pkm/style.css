@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Sarabun&display=swap');
+
+body{
+  background-image: linear-gradient(45deg, #6efff5 25%, #00ffee 25%, #00ffee 50%, #6efff5 50%, #6efff5 75%, #00ffee 75%, #00ffee 100%);
+  background-size: 10.00px 10.00px;
+  font-family: 'Sarabun', sans-serif;
+}
+
+div.filterCheck {
+	margin: 5px 0px;
+}
+
+div.resetPadding {
+  padding: 0px;
+  text-align: left;
+}
+
+div.pkTitle{  
+   text-align:center;
+  font-size:50px;
+  padding: 15px;
+  border-bottom: #ddd thin solid;
+}
+
+div.pkTrainerInfo {
+  text-align:center;
+}
+
+div.pkTrainerProfile{
+  display: inline-block;
+}
+
+div.pkTrainerName{  
+   display: inline-block;
+   text-align:left;
+   font-size: 20px;   
+   vertical-align:middle;
+}
+
+div.pkTrainerNote{  
+   text-align:center;
+  font-size:20px;
+  padding: 10px;
+  border-bottom: #ddd thin solid;
+}
+
+div#pkDataTable_wrapper{
+  padding-top:20px;
+}
+
+.css-checkbox {
+	position:absolute; 
+	z-index:-1000; 
+	left:-1000px; 
+	overflow: hidden; 
+	clip: rect(0 0 0 0); 
+	height:1px; 
+	width:1px; 
+	margin:-1px; 
+	padding:0; 
+	border:0;
+}
+.css-checkbox + label.css-label {
+	padding-left:23px;
+	display:inline-block;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+.css-checkbox:checked + label.css-label {
+	background-position: 0 -18px;
+}
+label.css-label {
+	background-image:url(https://static.tumblr.com/thygau1/QEzq313br/checkbox.png);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+table.dataTable thead tr {
+  background: repeating-linear-gradient(
+    -55deg,
+    #222,
+    #222 10px,
+    #333 10px,
+    #333 20px
+  );
+  color: white;
+}
+
+table.dataTable tbody tr:hover > td img.pkSprite{
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  20% {
+    transform: translate3d(0, 3px, 0);
+  }
+  
+  40% {
+    transform: translate3d(0, -3px, 0);
+  }
+
+  80% {
+    transform: translate3d(0, 3px, 0);
+  }
+
+  100% {
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+label.filterLabel{
+	font-size: 20px;
+  vertical-align: middle;
+  margin-right:10px;
+}
+
+div.pkHiddenAbilitySelected{
+  margin:15px 0px;
+}
+
+div.pkEggMovesSelected{
+  margin:15px 0px;
+}
+
+
+
+.dataTables_filter input {
+  width: 450px;
+  text-align: center;
+}
