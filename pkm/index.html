@@ -2,10 +2,8 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-        <title>{Title}{block:SearchPage} ({lang:Search results for SearchQuery}){/block:SearchPage}{block:PermalinkPage}{block:PostSummary} — {PostSummary}{/block:PostSummary}{/block:PermalinkPage}</title>
-        {block:Description}
+        <title>Aprimons JuiJui</title>
         <meta name="description" content="{MetaDescription}">
-        {/block:Description}
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css'><link rel="stylesheet" href="./style.css">
@@ -16,13 +14,11 @@
 <script>
    //############Configuration############	  
 	  var sheet_title = 'Pokemon Rare Balls List';     																//ชื่อ Title
-	  var trainer_image = 'https://cdn.pixabay.com/photo/2019/11/27/14/06/pokemon-4657023_960_720.png'; 			//ลิงค์รูปภาพของเรา
+	  var trainer_image = 'https://i.pinimg.com/originals/9f/90/7f/9f907f664306fdc5bbec47a9941bd2e5.jpg'; 			//ลิงค์รูปภาพของเรา
 	  var trainer_name = 'JuiJui'; 
-	  var trainer_fc = 'SW-1840-1674-8122';																			//FC เครื่อง
-	  var trainer_note = 'ว่างช่วง 2 ทุ่มเป็นต้นไปนะครับ';																			//Note ไว้สำหรับบอกเรื่องต่างๆ ใส่ข้อความอะไรก็ได้
+	  var trainer_fc = '';																			//FC เครื่อง
+	  var trainer_note = '';																			//Note ไว้สำหรับบอกเรื่องต่างๆ ใส่ข้อความอะไรก็ได้
 	  
-	  
-	  var google_sheet_id = '1FdFsAXQN8UBM600AL-yG-PEDPVqSVf_fI7rXVcepU2Q';											//ID Google Spreadsheet
 	  var page_length = 50;																							//จำนวนแถวที่แสดงในแต่ละหน้า
 	  var page_length_change = true;																				//เปิด / ปิดระบบการแสดงจำนวนแถว (เปิด = true / ปิด = false)
 	  var split_page = true;																						//เปิด / ปิดระบบแบ่งหน้า (เปิด = true / ปิด = false)
