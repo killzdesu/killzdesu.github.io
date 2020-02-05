@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Sarabun&display=swap');
 
 body{
-  background-image: linear-gradient(45deg, #6efff5 25%, #00ffee 25%, #00ffee 50%, #6efff5 50%, #6efff5 75%, #00ffee 75%, #00ffee 100%);
+  background-color: #deaaaa;
   background-size: 10.00px 10.00px;
   font-family: 'Sarabun', sans-serif;
 }
