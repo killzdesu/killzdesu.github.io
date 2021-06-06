@@ -1,4 +1,4 @@
-importScripts("/medkit/precache-manifest.19e2917f0dca5370bf3ae094df78bc25.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/medkit/precache-manifest.5e1836bad373c8031478ea1465856162.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 workbox.core.setCacheNameDetails({prefix: "medkit"});
 
