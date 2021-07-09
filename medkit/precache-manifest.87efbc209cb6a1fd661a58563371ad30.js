@@ -1,15 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9ddbde8e804b62aef432ee59da5d79e8",
-    "url": "/medkit/.index.html.swp"
-  },
-  {
-    "revision": "9e69485961a52e24b0a9",
+    "revision": "9e2ea5514c8f10bdd98d",
     "url": "/medkit/css/app.f1474bda.css"
   },
   {
-    "revision": "7360c73b10f116776bf7",
-    "url": "/medkit/css/chunk-07849455.afac55c0.css"
+    "revision": "99e0c8c10be27a5ae93b",
+    "url": "/medkit/css/chunk-79768080.afac55c0.css"
   },
   {
     "revision": "f7b8ab9c4c2bd042cb2a",
@@ -20,20 +16,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/medkit/img/medkit.abd198a2.png"
   },
   {
-    "revision": "6691e7e885b51a85e74acb06f29a9bc4",
+    "revision": "3fa9b1caabcbd1981af832b8c924cb8b",
     "url": "/medkit/index.html"
   },
   {
-    "revision": "9e69485961a52e24b0a9",
-    "url": "/medkit/js/app.e5ad7478.js"
-  },
-  {
-    "revision": "7360c73b10f116776bf7",
-    "url": "/medkit/js/chunk-07849455.cab83176.js"
-  },
-  {
-    "revision": "67637d8e87d2c406db00",
-    "url": "/medkit/js/chunk-12a8c0a6.9b4d1022.js"
+    "revision": "9e2ea5514c8f10bdd98d",
+    "url": "/medkit/js/app.0f1a7451.js"
   },
   {
     "revision": "f097cfcbf101b78bfc82",
@@ -52,8 +40,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/medkit/js/chunk-2d21a3d2.9c7faa59.js"
   },
   {
-    "revision": "a5a3b3f4e3a3ef6ad524",
-    "url": "/medkit/js/chunk-647cbda4.db2ac359.js"
+    "revision": "e58cb01a913a0fa65a02",
+    "url": "/medkit/js/chunk-3ed70776.3f757e9f.js"
+  },
+  {
+    "revision": "ef7b0af1703b3db28c9d",
+    "url": "/medkit/js/chunk-70dc84b4.672bb5fd.js"
+  },
+  {
+    "revision": "99e0c8c10be27a5ae93b",
+    "url": "/medkit/js/chunk-79768080.df68d23a.js"
   },
   {
     "revision": "f7b8ab9c4c2bd042cb2a",
